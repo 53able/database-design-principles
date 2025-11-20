@@ -104,8 +104,10 @@ const AppContent = () => {
  * TinyBase Providerでラップされたアプリケーション
  */
 export const App = () => {
+  // 型アサーション: TinyBaseのスキーマベースストアとProviderの型の互換性の問題を回避
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return (
-    <Provider store={store}>
+    <Provider store={store as any}>
       <AppContent />
     </Provider>
   );
