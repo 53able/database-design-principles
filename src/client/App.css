@@ -1,0 +1,814 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f5f5f5;
+}
+
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.app-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.app-header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.app-header p {
+  opacity: 0.9;
+}
+
+.app-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.section {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.section h2 {
+  color: #333;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.section > p {
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.tables-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1.5rem;
+}
+
+.table-container {
+  background: #fafafa;
+  padding: 1rem;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+}
+
+.table-container h3 {
+  color: #555;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.data-table thead {
+  background-color: #667eea;
+  color: white;
+}
+
+.data-table th {
+  padding: 0.75rem;
+  text-align: left;
+  font-weight: 600;
+}
+
+.data-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.data-table tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+.data-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* アノマリーデモ用スタイル */
+.anomaly-demo {
+  margin-top: 1rem;
+}
+
+.tab-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.tab-buttons button {
+  padding: 0.75rem 1.5rem;
+  border: 2px solid #667eea;
+  background: white;
+  color: #667eea;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.tab-buttons button:hover {
+  background: #f0f0ff;
+}
+
+.tab-buttons button.active {
+  background: #667eea;
+  color: white;
+}
+
+.anomaly-explanation {
+  background: #fff9e6;
+  border-left: 4px solid #ffa500;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+}
+
+.anomaly-explanation h4 {
+  margin-bottom: 0.5rem;
+  color: #d97706;
+}
+
+.anomaly-explanation ul {
+  margin-left: 1.5rem;
+}
+
+.anomaly-explanation li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+.action-panel {
+  background: #f5f5f5;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.insert-panel {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.insert-panel h4 {
+  width: 100%;
+  margin-bottom: 0.5rem;
+  color: #555;
+}
+
+.insert-panel input {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  flex: 1;
+  min-width: 150px;
+}
+
+.insert-panel button {
+  padding: 0.5rem 1rem;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.insert-panel button:hover {
+  background: #5568d3;
+}
+
+.error-message {
+  background: #fee;
+  border: 2px solid #fcc;
+  color: #c33;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.success-message {
+  background: #efe;
+  border: 2px solid #cfc;
+  color: #3c3;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.delete-btn {
+  padding: 0.25rem 0.75rem;
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.delete-btn:hover {
+  background: #c82333;
+}
+
+.bad-design .data-table input[type='number'] {
+  width: 80px;
+  padding: 0.25rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.good-design .data-table input[type='number'] {
+  width: 80px;
+  padding: 0.25rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+/* データ型デモ用スタイル */
+.data-type-demo {
+  margin-top: 1rem;
+}
+
+.category-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.category-tabs button {
+  padding: 0.75rem 1.5rem;
+  border: 2px solid #667eea;
+  background: white;
+  color: #667eea;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+  font-size: 0.9rem;
+}
+
+.category-tabs button:hover {
+  background: #f0f0ff;
+}
+
+.category-tabs button.active {
+  background: #667eea;
+  color: white;
+}
+
+.type-demo-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.explanation-box {
+  background: #e8f4f8;
+  border-left: 4px solid #2196f3;
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+.explanation-box h4 {
+  margin-bottom: 0.5rem;
+  color: #1976d2;
+}
+
+.explanation-box ul {
+  margin-left: 1.5rem;
+}
+
+.explanation-box li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+.interactive-demo {
+  background: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+}
+
+.interactive-demo h4 {
+  margin-bottom: 1rem;
+  color: #555;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.input-group label {
+  min-width: 100px;
+  font-weight: 600;
+  color: #555;
+}
+
+.input-group input,
+.input-group select {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.result-box {
+  background: white;
+  padding: 1rem;
+  border-radius: 4px;
+  border: 1px solid #e0e0e0;
+  margin-top: 1rem;
+}
+
+.result-box h5 {
+  margin-bottom: 0.5rem;
+  color: #555;
+}
+
+.result-box code {
+  background: #f5f5f5;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-family: 'Courier New', monospace;
+  color: #d63384;
+}
+
+.result-box .warning {
+  color: #856404;
+  background: #fff3cd;
+  padding: 0.5rem;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+}
+
+.result-box .error {
+  color: #721c24;
+  background: #f8d7da;
+  padding: 0.5rem;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+}
+
+.result-box .success {
+  color: #155724;
+  background: #d4edda;
+  padding: 0.5rem;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+}
+
+.result-box .hint {
+  color: #666;
+  font-style: italic;
+}
+
+.result-box ul {
+  margin-left: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.result-box li {
+  margin-bottom: 0.25rem;
+}
+
+.examples-table {
+  margin-top: 1rem;
+}
+
+.examples-table h4 {
+  margin-bottom: 0.5rem;
+  color: #555;
+}
+
+.current-time-demo {
+  margin-top: 1rem;
+}
+
+.current-time-demo h4 {
+  margin-bottom: 1rem;
+  color: #555;
+}
+
+.time-examples {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.time-box {
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+  text-align: center;
+}
+
+.time-box strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #667eea;
+}
+
+.time-box code {
+  display: block;
+  background: white;
+  padding: 0.5rem;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+  font-family: 'Courier New', monospace;
+  color: #d63384;
+  word-break: break-all;
+}
+
+.time-box .hint {
+  font-size: 0.875rem;
+  color: #666;
+  font-style: italic;
+}
+
+.examples-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.good-examples h4,
+.bad-examples h4 {
+  margin-bottom: 0.5rem;
+  color: #555;
+}
+
+.good-examples h4 {
+  color: #155724;
+}
+
+.bad-examples h4 {
+  color: #721c24;
+}
+
+/* キーデモ用スタイル */
+.key-demo {
+  margin-top: 1rem;
+}
+
+.key-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.key-tabs button {
+  padding: 0.75rem 1.5rem;
+  border: 2px solid #667eea;
+  background: white;
+  color: #667eea;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+  font-size: 0.9rem;
+}
+
+.key-tabs button:hover {
+  background: #f0f0ff;
+}
+
+.key-tabs button.active {
+  background: #667eea;
+  color: white;
+}
+
+.key-demo-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.add-button {
+  padding: 0.75rem 1.5rem;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+.add-button:hover {
+  background: #5568d3;
+}
+
+.badge-primary {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: #667eea;
+  color: white;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.badge-candidate {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: #ffa500;
+  color: white;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.candidate-keys-list {
+  margin-top: 1rem;
+}
+
+.candidate-keys-list h4 {
+  margin-bottom: 0.5rem;
+  color: #555;
+}
+
+.comparison-box {
+  background: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+}
+
+.comparison-box h4 {
+  margin-bottom: 1rem;
+  color: #555;
+}
+
+.comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.comparison-item {
+  background: white;
+  padding: 1rem;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+}
+
+.comparison-item h5 {
+  margin-bottom: 0.75rem;
+  color: #667eea;
+  font-size: 1.1rem;
+}
+
+.comparison-item ul {
+  margin-left: 1.5rem;
+}
+
+.comparison-item li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+/* 正規化デモ用スタイル */
+.normalization-demo {
+  margin-top: 1rem;
+}
+
+.normalization-steps {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.normalization-steps button {
+  padding: 0.75rem 1.5rem;
+  border: 2px solid #667eea;
+  background: white;
+  color: #667eea;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+  font-size: 0.9rem;
+}
+
+.normalization-steps button:hover {
+  background: #f0f0ff;
+}
+
+.normalization-steps button.active {
+  background: #667eea;
+  color: white;
+}
+
+.normalization-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.warning-box {
+  background: #fff3cd;
+  border-left: 4px solid #ffc107;
+}
+
+.warning-box h4 {
+  color: #856404;
+}
+
+.info-box {
+  background: #d1ecf1;
+  border-left: 4px solid #17a2b8;
+}
+
+.info-box h4 {
+  color: #0c5460;
+}
+
+.success-box {
+  background: #d4edda;
+  border-left: 4px solid #28a745;
+}
+
+.success-box h4 {
+  color: #155724;
+}
+
+.warning-text {
+  color: #856404;
+  font-weight: 600;
+}
+
+.success-text {
+  color: #155724;
+  font-weight: 600;
+}
+
+.normalization-diagram {
+  background: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+}
+
+.normalization-diagram h4 {
+  margin-bottom: 1rem;
+  color: #555;
+}
+
+.diagram-box {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.diagram-item {
+  background: white;
+  padding: 1rem;
+  border-radius: 6px;
+  border: 2px solid #667eea;
+  min-width: 200px;
+  flex: 1;
+}
+
+.diagram-item strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #667eea;
+  font-size: 1.1rem;
+}
+
+.diagram-item ul {
+  margin-left: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.diagram-item li {
+  margin-bottom: 0.25rem;
+  line-height: 1.5;
+}
+
+.diagram-arrow {
+  font-size: 2rem;
+  color: #667eea;
+  font-weight: bold;
+}
+
+.benefits-box {
+  background: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+}
+
+.benefits-box h4 {
+  margin-bottom: 1rem;
+  color: #555;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.benefit-item {
+  background: white;
+  padding: 1rem;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+}
+
+.benefit-item strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #28a745;
+}
+
+.benefit-item p {
+  color: #666;
+  line-height: 1.6;
+  font-size: 0.9rem;
+}
+
+/* 制約デモ用スタイル */
+.constraint-demo {
+  margin-top: 1rem;
+}
+
+.constraint-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.constraint-tabs button {
+  padding: 0.75rem 1.5rem;
+  border: 2px solid #667eea;
+  background: white;
+  color: #667eea;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+  font-size: 0.9rem;
+}
+
+.constraint-tabs button:hover {
+  background: #f0f0ff;
+}
+
+.constraint-tabs button.active {
+  background: #667eea;
+  color: white;
+}
+
+.constraint-demo-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
